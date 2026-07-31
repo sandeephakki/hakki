@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App Store — Hakki</title>
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/theme.css">
+<script>(function(){var t=localStorage.getItem('hakki_theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);})();</script>
+<script src="js/env-config.js"></script>
+<script src="js/readme.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html"><img src="assets/hakki_bird.svg" alt="Hakki"> Hakki</a>
+  <nav class="links">
+    <a href="index.html">Home</a>
+    <a href="store.html">App Store</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="padding-top:40px">
+    <h1>App Store</h1>
+    <p class="tag">Every PWA I've shipped, in one place. Scan the QR to open on your phone, or tap through on desktop.</p>
+  </section>
+
+  <div class="grid" id="storeGrid"></div>
+</div>
+
+<footer class="site">© <span id="year"></span> Hakki.in</footer>
+
+<script src="js/app.js"></script>
+<script>
+(function () {
+  var grid = document.getElementById('storeGrid');
+  var projects = (window.ENV && window.ENV.projects) || {};
+  var html = '';
+  Object.keys(projects).forEach(function (key) {
+    var p = projects[key];
+    var qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(p.url);
+    html += '' +
+      '<div class="card proj-card" style="cursor:pointer" data-key="' + key + '">' +
+        '<div class="top">' +
+          '<img src="' + p.icon + '" alt="' + p.name + '">' +
+          '<div><h3>' + p.name + '</h3><span class="badge">PWA</span></div>' +
+        '</div>' +
+        '<p>' + p.desc + '</p>' +
+        '<div class="qr">' +
+          '<img src="' + qrSrc + '" alt="QR code for ' + p.name + '" loading="lazy">' +
+          '<div class="url">' + p.url + '</div>' +
+        '</div>' +
+        '<div class="actions">' +
+          '<a class="btn primary" href="' + p.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open App</a>' +
+          '<button class="btn ghost" type="button" data-readme="' + key + '">View README</button>' +
+        '</div>' +
+      '</div>';
+  });
+  grid.innerHTML = html || '<div class="state">No projects configured yet.</div>';
+
+  grid.querySelectorAll('[data-key]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      README.open(projects[card.getAttribute('data-key')]);
+    });
+  });
+})();
+</script>
+</body>
+</html>

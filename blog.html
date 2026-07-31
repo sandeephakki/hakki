@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — Hakki</title>
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/theme.css">
+<script>(function(){var t=localStorage.getItem('hakki_theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);})();</script>
+<script src="js/env-config.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html"><img src="assets/hakki_bird.svg" alt="Hakki"> Hakki</a>
+  <nav class="links">
+    <a href="index.html">Home</a>
+    <a href="store.html">App Store</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="padding-top:40px">
+    <h1>Blog</h1>
+    <p class="tag">Posts pulled live from <a href="https://www.hakki.in/" target="_blank" rel="noopener" style="color:var(--teal)">hakki.in</a> — no copy-paste, no export step, always current.</p>
+  </section>
+
+  <div id="blogList"><div class="state">Loading posts…</div></div>
+</div>
+
+<footer class="site">© <span id="year"></span> Hakki.in</footer>
+
+<script src="js/app.js"></script>
+<script src="js/blog.js"></script>
+</body>
+</html>

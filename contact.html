@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — Hakki</title>
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/theme.css">
+<script>(function(){var t=localStorage.getItem('hakki_theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);})();</script>
+<script src="js/env-config.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html"><img src="assets/hakki_bird.svg" alt="Hakki"> Hakki</a>
+  <nav class="links">
+    <a href="index.html">Home</a>
+    <a href="store.html">App Store</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="padding-top:40px">
+    <h1>Contact</h1>
+    <p class="tag">No backend here — this just opens your mail app pre-filled. Or reach me directly at <a href="mailto:sandeep@hakki.in">sandeep@hakki.in</a> or on <a href="https://www.linkedin.com/in/sandeepha/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </section>
+
+  <form class="contact" id="contactForm">
+    <input type="text" id="cName" placeholder="Your name" required>
+    <input type="email" id="cEmail" placeholder="Your email" required>
+    <textarea id="cMsg" placeholder="Message" required></textarea>
+    <button type="submit" class="btn primary">Send</button>
+  </form>
+</div>
+
+<footer class="site">© <span id="year"></span> Hakki.in</footer>
+
+<script src="js/app.js"></script>
+<script>
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = document.getElementById('cName').value;
+  var email = document.getElementById('cEmail').value;
+  var msg = document.getElementById('cMsg').value;
+  var body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+  window.location.href = 'mailto:sandeep@hakki.in?subject=' + encodeURIComponent('Message from hakki.in') + '&body=' + body;
+});
+</script>
+</body>
+</html>
