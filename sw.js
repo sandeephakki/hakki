@@ -1,12 +1,13 @@
 // Hakki hub — service worker. Cache-first for the app shell, network-first
 // for the Blogger feed script (blog.js appends it directly, not via SW,
-// so nothing to special-case here). Bump CACHE on every deploy.
-const CACHE = 'hakki-in-v1';
+// so nothing to special-case here). Single-page app now — one HTML shell,
+// hash routing handles the rest. Bump CACHE on every deploy.
+const CACHE = 'hakki-in-v2';
 const SHELL = [
-  './', 'index.html', 'store.html', 'blog.html', 'contact.html',
-  'css/theme.css', 'js/env-config.js', 'js/app.js', 'js/blog.js',
+  './', 'index.html',
+  'css/theme.css', 'js/env-config.js', 'js/app.js', 'js/router.js', 'js/blog.js', 'js/readme.js',
   'manifest.json', 'icon-192.png', 'icon-512.png',
-  'assets/hakki_bird.svg',
+  'assets/hakki_bird.svg', 'assets/icons/avatar.jpg',
   'assets/icons/apple-touch-icon.png', 'assets/icons/favicon-16.png',
   'assets/icons/favicon-32.png', 'assets/icons/favicon-48.png',
   'assets/icons/spendna-icon.png', 'assets/icons/studin-icon.png'

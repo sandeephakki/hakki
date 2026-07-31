@@ -69,6 +69,11 @@ img { max-width: 100%; display: block; }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
 
+/* ── SPA screens (router.js toggles .active) ── */
+.screen { display: none; }
+.screen.active { display: block; animation: screenIn .25s ease; }
+@keyframes screenIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
 /* ── header / nav ── */
 header.site {
   position: sticky; top: 0; z-index: 50;

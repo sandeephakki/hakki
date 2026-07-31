@@ -4,7 +4,8 @@
 // API (alt=json-in-script=CALLBACK avoids CORS entirely) — reusing that
 // beats hand-rolling a scraper/export step, and it keeps this page in
 // sync automatically as new posts go up on Blogger.
-// ponytail: no static export/scrape step; the platform's own feed does it.
+// Exposes window.BlogScreen.init() — called lazily by router.js the
+// first time the person opens the Blog screen, not on every page load.
 // ═══════════════════════════════════════════════════
 (function () {
   var MAX_POSTS = 12;
@@ -59,17 +60,17 @@
     try { render(json); } catch (e) { fail(); }
   };
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var list = document.getElementById('blogList');
-    if (!list) return;
-    var host = (window.ENV && window.ENV.blogHost) || 'https://www.hakki.in';
-    var script = document.createElement('script');
-    script.src = host + '/feeds/posts/default?alt=json-in-script&max-results=' + MAX_POSTS + '&callback=__hakkiBlogCallback';
-    script.onerror = fail;
-    // Give the JSONP call a timeout — Blogger feeds are usually fast, but
-    // don't leave the user staring at a spinner forever on a bad network.
-    var timer = setTimeout(fail, 8000);
-    script.onload = function () { clearTimeout(timer); };
-    document.body.appendChild(script);
-  });
+  window.BlogScreen = {
+    init: function () {
+      var list = document.getElementById('blogList');
+      if (!list) return;
+      var host = (window.ENV && window.ENV.blogHost) || 'https://www.hakki.in';
+      var script = document.createElement('script');
+      script.src = host + '/feeds/posts/default?alt=json-in-script&max-results=' + MAX_POSTS + '&callback=__hakkiBlogCallback';
+      script.onerror = fail;
+      var timer = setTimeout(fail, 8000);
+      script.onload = function () { clearTimeout(timer); };
+      document.body.appendChild(script);
+    }
+  };
 })();

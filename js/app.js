@@ -28,11 +28,8 @@
       btn.addEventListener('click', APP.cycleTheme);
     }
 
-    // active nav link
-    var here = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('nav.links a').forEach(function (a) {
-      if (a.getAttribute('href') === here) a.classList.add('active');
-    });
+    // active nav link is now handled by router.js (hash-based screens)
+
 
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
