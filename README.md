@@ -1,6 +1,6 @@
 # Hakki.in
 
-Parent hub PWA for the Hakki project family (this site, [Spend-na](https://sandeephakki.github.io/spend-na/), [Student Insight](https://studin.in/)). Static, no build step, no backend. Single-page app — one HTML shell, hash-routed screens.
+Parent hub PWA for the Hakki project family (this site, [Spend-na](https://www.spendna.in/), [Student Insight](https://studin.in/)). Static, no build step, no backend. Single-page app — one HTML shell, hash-routed screens.
 
 ## Structure
 ```

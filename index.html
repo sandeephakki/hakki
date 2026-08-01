@@ -14,16 +14,19 @@
 <script>
   (function(){var t=localStorage.getItem('hakki_theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);})();
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6d773322294c108111603348f4365f"}'></script><!-- End Cloudflare Web Analytics -->
 <script src="js/env-config.js"></script>
 </head>
 <body>
 
 <header class="site">
   <a class="brand" href="/#home"><img src="assets/hakki_bird.svg" alt="Hakki"> Hakki</a>
-<a href="/#home" data-screen="home">Home</a>
-<a href="/#store" data-screen="store">App Store</a>
-<a href="/#blog" data-screen="blog">Blog</a>
-<a href="/#contact" data-screen="contact">Contact</a>
+  <nav class="links">
+    <a href="/#home" data-screen="home">Home</a>
+    <a href="/#store" data-screen="store">App Store</a>
+    <a href="/#blog" data-screen="blog">Blog</a>
+    <a href="/#contact" data-screen="contact">Contact</a>
+  </nav>
   <button id="themeToggle" aria-label="Toggle theme">🌙</button>
 </header>
 
@@ -38,7 +41,7 @@
     <div class="cta-row">
       <a class="btn primary" href="https://drive.google.com/file/d/10cZkBQjM8cUhp2u7VslhpvSh_Ki6iByQ/view" target="_blank" rel="noopener">Download CV</a>
       <a class="btn ghost" href="https://docs.google.com/document/d/1czyRxWznXaFaTVVExQkRxmwv-dhIUrXFQqS78F8Pkag/mobilebasic" target="_blank" rel="noopener">Cloud White Paper</a>
-      <a class="btn ghost" href="#blog">Read the Blog</a>
+      <a class="btn ghost" href="/#blog">Read the Blog</a>
     </div>
     <div class="stat-chips">
       <div><b>15</b><span>Years</span></div>
@@ -50,8 +53,8 @@
 
   <section class="section" id="about">
     <h2>About</h2>
-    <p class="lede">Systems are only worth building if they solve a real problem — that's the lens I bring to every architecture decision. I started out fresh from an Electronics &amp; Communications degree, took a bet on a .NET diploma, and wrote my first line of C# back in 2011. Over 15 years that bet turned into a career spanning full-stack development, data engineering, and now enterprise-scale cloud architecture.</p></br>
-    <p class="lede">Today, as a Solutions Architect at Nokia, I design end-to-end Azure cloud solutions, integrate AI capabilities like Azure OpenAI and Semantic Kernel into existing systems, and act as the technical decision point across cross-functional teams — asking "should we build this" before "how do we build this."</p></br>
+    <p class="lede">Systems are only worth building if they solve a real problem — that's the lens I bring to every architecture decision. I started out fresh from an Electronics &amp; Communications degree, took a bet on a .NET diploma, and wrote my first line of C# back in 2011. Over 15 years that bet turned into a career spanning full-stack development, data engineering, and now enterprise-scale cloud architecture.</p>
+    <p class="lede">Today, as a Solutions Architect at Nokia, I design end-to-end Azure cloud solutions, integrate AI capabilities like Azure OpenAI and Semantic Kernel into existing systems, and act as the technical decision point across cross-functional teams — asking "should we build this" before "how do we build this."</p>
     <p class="lede">Off the clock, I mentor students on careers in tech, and I'm currently digging into agentic AI systems and how architects — not just engineers — can lead AI adoption inside large organisations.</p>
     <div class="fact-grid">
       <div class="card"><div class="k">Role</div><div class="v">Solutions Architect, Nokia</div></div>
@@ -73,6 +76,50 @@
       <span class="chip" style="opacity:.85">Azure OpenAI &amp; Semantic Kernel</span>
       <span class="chip" style="opacity:.8">Azure Machine Learning</span>
       <span class="chip" style="opacity:.75">Microservices &amp; DevOps</span>
+    </div>
+  </section>
+
+  <section class="section" id="expertise">
+    <h2>Where I Add Value</h2>
+    <p class="lede">Five areas people usually bring me in for.</p>
+    <div class="expertise-grid">
+      <div class="xcard">
+        <div class="xicon">☁️</div>
+        <h3>Azure Solutions Architect</h3>
+        <p>AZ-900, AZ-302, AZ-303 &amp; AZ-305 certified — I design and validate enterprise-scale Azure architectures end to end.</p>
+      </div>
+      <div class="xcard">
+        <div class="xicon">🤖</div>
+        <h3>AI Practitioner</h3>
+        <p>AI-900 certified — I evaluate and integrate AI capabilities like Azure OpenAI and Semantic Kernel into real production systems.</p>
+      </div>
+      <div class="xcard">
+        <div class="xicon">📱</div>
+        <h3>PWA Design &amp; Development</h3>
+        <p>Offline-first, installable web apps — Spend-na and Student Insight are both built and shipped by me end to end.</p>
+      </div>
+      <div class="xcard">
+        <div class="xicon">🧭</div>
+        <h3>Technical Consulting</h3>
+        <p>From requirement to deployment — I bridge business problems and technical execution across cross-functional teams.</p>
+      </div>
+      <div class="xcard">
+        <div class="xicon">🎤</div>
+        <h3>Tech Speaker</h3>
+        <p>8+ years running Microsoft community sessions, corporate workshops and college seminars on cloud &amp; emerging tech.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="speaking">
+    <h2>On Stage</h2>
+    <p class="lede">A few moments from sessions and workshops over the years.</p>
+    <div class="speaking-grid">
+      <img src="assets/speaking/seminar-1.jpg" alt="Speaking session on architecture, Wipro" loading="lazy">
+      <img src="assets/speaking/seminar-5.jpg" alt="Cloud workshop for a project team" loading="lazy">
+      <img src="assets/speaking/seminar-2.jpg" alt="Cloud session with the team" loading="lazy">
+      <img src="assets/speaking/seminar-3.jpg" alt="College seminar session" loading="lazy">
+      <img src="assets/speaking/seminar-4.jpg" alt="Technical session, early career" loading="lazy">
     </div>
   </section>
 
@@ -98,7 +145,7 @@
         </div>
         <p>A personal finance tracker that keeps every rupee on your own device — log expenses, spot spending patterns, and stay on budget with zero accounts, zero servers, and zero data leaving your phone.</p>
         <div class="mini-tags"><span>Offline-first</span><span>No sign-up</span><span>Installable</span></div>
-        <a class="btn ghost" href="https://spendna.in/" target="_blank" rel="noopener">Open App →</a>
+        <a class="btn ghost" href="https://www.spendna.in/" target="_blank" rel="noopener">Open App →</a>
       </div>
       <div class="card proj-card">
         <div class="top">
@@ -159,7 +206,7 @@
     <a href="https://www.linkedin.com/in/sandeep-s-hakki-83174022/" target="_blank" rel="noopener" title="LinkedIn">in</a>
     <a href="mailto:sandeep@hakki.in" title="Email">✉</a>
   </div>
-  <div style="margin-top:10px">© <span id="year"></span> Hakki.in · <a href="https://hakki-in/" target="_blank" rel="noopener">source</a></div>
+  <div style="margin-top:10px">© <span id="year"></span> Hakki.in · <a href="https://sandeephakki.github.io/hakki-in/" target="_blank" rel="noopener">source</a></div>
 </footer>
 
 <script src="js/app.js"></script>
@@ -215,7 +262,19 @@
     });
   }
 
-  ROUTER.register('home', null);
+  ROUTER.register('home', function () {
+    document.querySelectorAll('.speaking-grid img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        var ov = document.createElement('div');
+        ov.className = 'lightbox-overlay';
+        ov.innerHTML = '<button class="lclose" aria-label="Close">✕</button><img src="' + img.src + '" alt="">';
+        document.body.appendChild(ov);
+        function close() { ov.remove(); }
+        ov.addEventListener('click', function (e) { if (e.target === ov || e.target.classList.contains('lclose')) close(); });
+        document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
+      });
+    });
+  });
   ROUTER.register('store', initStore);
   ROUTER.register('blog', function () { BlogScreen.init(); });
   ROUTER.register('contact', initContact);

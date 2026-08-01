@@ -43,7 +43,7 @@
     blogHost: 'https://www.hakki.in',
     // Family project URLs, single source of truth for store.html cards + QR codes.
     projects: {
-      spendna: { name: 'Spend-na', url: 'https://sandeephakki.github.io/spend-na/', desc: 'Personal finance tracker — your money, your device. Offline-first, no accounts.', icon: 'assets/icons/spendna-icon.png', repo: 'sandeephakki/spend-na' },
+      spendna: { name: 'Spend-na', url: 'https://www.spendna.in/', desc: 'Personal finance tracker — your money, your device. Offline-first, no accounts.', icon: 'assets/icons/spendna-icon.png', repo: 'sandeephakki/spend-na' },
       studin:  { name: 'Student Insight', url: 'https://studin.in/', desc: 'Privacy-first, in-browser student analytics for schools.', icon: 'assets/icons/studin-icon.png', repo: 'sandeephakki/student-insight' }
     }
   };

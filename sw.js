@@ -2,7 +2,7 @@
 // for the Blogger feed script (blog.js appends it directly, not via SW,
 // so nothing to special-case here). Single-page app now — one HTML shell,
 // hash routing handles the rest. Bump CACHE on every deploy.
-const CACHE = 'hakki-in-v2';
+const CACHE = 'hakki-in-v3';
 const SHELL = [
   './', 'index.html',
   'css/theme.css', 'js/env-config.js', 'js/app.js', 'js/router.js', 'js/blog.js', 'js/readme.js',
@@ -10,7 +10,9 @@ const SHELL = [
   'assets/hakki_bird.svg', 'assets/icons/avatar.jpg',
   'assets/icons/apple-touch-icon.png', 'assets/icons/favicon-16.png',
   'assets/icons/favicon-32.png', 'assets/icons/favicon-48.png',
-  'assets/icons/spendna-icon.png', 'assets/icons/studin-icon.png'
+  'assets/icons/spendna-icon.png', 'assets/icons/studin-icon.png',
+  'assets/speaking/seminar-1.jpg', 'assets/speaking/seminar-2.jpg', 'assets/speaking/seminar-3.jpg',
+  'assets/speaking/seminar-4.jpg', 'assets/speaking/seminar-5.jpg'
 ];
 
 self.addEventListener('install', (e) => {
