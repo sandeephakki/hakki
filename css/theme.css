@@ -170,9 +170,22 @@ footer.site a { color: var(--teal); }
 
 .state { text-align: center; color: var(--ghost); padding: 30px 0; font-size: 14px; }
 
+.navToggle { display: none; }
 @media (max-width: 600px) {
-  nav.links { display: none; }
   .hero h1 { font-size: 24px; }
+  .navToggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--fog);
+    background: var(--card); color: var(--ink); font-size: 16px; margin-left: 8px;
+  }
+  nav.links {
+    position: fixed; top: 60px; left: 12px; right: 12px; z-index: 150;
+    flex-direction: column; gap: 2px; background: var(--bg); border: 1px solid var(--fog);
+    border-radius: var(--rL); padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    display: none;
+  }
+  nav.links.open { display: flex; }
+  nav.links a { padding: 12px 14px; }
 }
 
 /* ── hero stat chips (inline, not a separate boxed bar) ── */
@@ -207,27 +220,25 @@ footer.site a { color: var(--teal); }
 .role-strip .role .yrs { font-size: 11px; color: var(--ghost); margin-top: 6px; }
 
 /* ── expertise cards ── */
-.expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-top: 20px; }
-.xcard { background: var(--card); border: 1px solid var(--fog); border-radius: var(--rL); padding: 20px 18px; transition: transform .15s ease, border-color .15s ease; }
+.expertise-grid { display: flex; gap: 12px; overflow-x: auto; padding: 18px 2px 10px; margin: 0 -2px; scrollbar-width: thin; }
+.xcard {
+  flex: 0 0 auto; width: 190px; background: var(--card); border: 1px solid var(--fog);
+  border-radius: var(--rL); padding: 20px 18px; transition: transform .15s ease, border-color .15s ease;
+}
 .xcard:hover { transform: translateY(-3px); border-color: var(--teal); }
 .xcard .xicon { font-size: 26px; margin-bottom: 10px; }
 .xcard h3 { margin: 0 0 6px; font-size: 15px; }
 .xcard p { margin: 0; font-size: 13px; color: var(--ink3); line-height: 1.55; }
 
-/* ── speaking / seminar photo gallery ── */
+/* ── speaking / seminar photo gallery — horizontal scroll, same rhythm ── */
 .speaking-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px;
+  display: flex; gap: 12px; overflow-x: auto; padding: 18px 2px 10px; margin: 0 -2px; scrollbar-width: thin;
 }
 .speaking-grid img {
-  width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r);
+  flex: 0 0 auto; width: 190px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r);
   border: 1px solid var(--fog); cursor: zoom-in; transition: transform .2s ease, box-shadow .2s ease;
 }
 .speaking-grid img:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
-.speaking-grid img:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: 4/3.6; }
-@media (max-width: 560px) {
-  .speaking-grid { grid-template-columns: repeat(2, 1fr); }
-  .speaking-grid img:first-child { grid-column: span 2; aspect-ratio: 16/10; }
-}
 .lightbox-overlay {
   position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.85);
   display: flex; align-items: center; justify-content: center; padding: 24px;

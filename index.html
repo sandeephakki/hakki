@@ -14,7 +14,6 @@
 <script>
   (function(){var t=localStorage.getItem('hakki_theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);})();
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f6d773322294c108111603348f4365f"}'></script><!-- End Cloudflare Web Analytics -->
 <script src="js/env-config.js"></script>
 </head>
 <body>
@@ -27,6 +26,7 @@
     <a href="/#blog" data-screen="blog">Blog</a>
     <a href="/#contact" data-screen="contact">Contact</a>
   </nav>
+  <button class="navToggle" id="navToggle" aria-label="Menu">☰</button>
   <button id="themeToggle" aria-label="Toggle theme">🌙</button>
 </header>
 
@@ -114,7 +114,7 @@
   <section class="section" id="speaking">
     <h2>On Stage</h2>
     <p class="lede">A few moments from sessions and workshops over the years.</p>
-    <div class="speaking-grid">
+    <div class="speaking-grid" id="speakingGrid">
       <img src="assets/speaking/seminar-1.jpg" alt="Speaking session on architecture, Wipro" loading="lazy">
       <img src="assets/speaking/seminar-5.jpg" alt="Cloud workshop for a project team" loading="lazy">
       <img src="assets/speaking/seminar-2.jpg" alt="Cloud session with the team" loading="lazy">
@@ -211,23 +211,27 @@
 
 <script src="js/app.js"></script>
 <script src="js/readme.js"></script>
+<script src="js/apps-auto.js"></script>
+<script src="js/speaking-auto.js"></script>
 <script src="js/blog.js"></script>
 <script src="js/router.js"></script>
 <script>
 (function () {
-  // ── App Store screen: builds cards from window.ENV.projects, lazy-inited ──
-  function initStore() {
+  // ── App Store screen: renders cards from the merged auto-discovered +
+  // manual project list, lazy-inited on first visit to #store ──
+  function renderStore(projects) {
     var grid = document.getElementById('storeGrid');
-    var projects = (window.ENV && window.ENV.projects) || {};
     var html = '';
+    var stored = {};
     Object.keys(projects).forEach(function (key) {
       var p = projects[key];
+      stored[key] = p;
       var qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(p.url);
       html += '' +
         '<div class="card proj-card" style="cursor:pointer" data-key="' + key + '">' +
           '<div class="top">' +
-            '<img src="' + p.icon + '" alt="' + p.name + '">' +
-            '<div><h3>' + p.name + '</h3><span class="badge">PWA</span></div>' +
+            '<img src="' + p.icon + '" alt="' + p.name + '" onerror="this.src=\'assets/icons/apple-touch-icon.png\'">' +
+            '<div><h3>' + p.name + '</h3><span class="badge">PWA' + (p._auto ? ' · auto' : '') + '</span></div>' +
           '</div>' +
           '<p>' + p.desc + '</p>' +
           '<div class="qr">' +
@@ -240,12 +244,18 @@
           '</div>' +
         '</div>';
     });
-    grid.innerHTML = html || '<div class="state">No projects configured yet.</div>';
+    grid.innerHTML = html || '<div class="state">No projects found yet.</div>';
     grid.querySelectorAll('[data-key]').forEach(function (card) {
       card.addEventListener('click', function () {
-        README.open(projects[card.getAttribute('data-key')]);
+        README.open(stored[card.getAttribute('data-key')]);
       });
     });
+  }
+
+  function initStore() {
+    var grid = document.getElementById('storeGrid');
+    grid.innerHTML = '<div class="state">Finding your apps…</div>';
+    AppsAuto.load(renderStore);
   }
 
   // ── Contact screen: mailto form handler, lazy-inited ──
@@ -262,17 +272,29 @@
     });
   }
 
+  function bindLightbox(container) {
+    container.addEventListener('click', function (e) {
+      var img = e.target.closest('img');
+      if (!img) return;
+      var ov = document.createElement('div');
+      ov.className = 'lightbox-overlay';
+      ov.innerHTML = '<button class="lclose" aria-label="Close">✕</button><img src="' + img.src + '" alt="">';
+      document.body.appendChild(ov);
+      function close() { ov.remove(); }
+      ov.addEventListener('click', function (ev) { if (ev.target === ov || ev.target.classList.contains('lclose')) close(); });
+      document.addEventListener('keydown', function esc(ev) { if (ev.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
+    });
+  }
+
   ROUTER.register('home', function () {
-    document.querySelectorAll('.speaking-grid img').forEach(function (img) {
-      img.addEventListener('click', function () {
-        var ov = document.createElement('div');
-        ov.className = 'lightbox-overlay';
-        ov.innerHTML = '<button class="lclose" aria-label="Close">✕</button><img src="' + img.src + '" alt="">';
-        document.body.appendChild(ov);
-        function close() { ov.remove(); }
-        ov.addEventListener('click', function (e) { if (e.target === ov || e.target.classList.contains('lclose')) close(); });
-        document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
-      });
+    var grid = document.getElementById('speakingGrid');
+    bindLightbox(grid); // covers the hard-coded fallback photos already in the DOM
+
+    SpeakingAuto.load(function (images) {
+      if (!images || !images.length) return; // API failed or empty — keep fallback markup as-is
+      grid.innerHTML = images.map(function (img) {
+        return '<img src="' + img.url + '" alt="' + img.name + '" loading="lazy">';
+      }).join('');
     });
   });
   ROUTER.register('store', initStore);

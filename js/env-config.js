@@ -41,7 +41,12 @@
     // Public Blogger feed this site migrates content from — used by blog.js
     // to pull posts client-side (JSONP, no server, no build step).
     blogHost: 'https://www.hakki.in',
-    // Family project URLs, single source of truth for store.html cards + QR codes.
+    // Manual overrides only — the App Store now auto-discovers any repo
+    // tagged with the "hakki-app" GitHub topic (see js/apps-auto.js).
+    // Add an entry here ONLY if you want to hand-tune copy/icon for a
+    // specific app beyond what's auto-pulled from GitHub; the `repo`
+    // field must match the GitHub slug exactly so it merges correctly.
+    // A brand-new app needs ZERO edits here — just tag its repo.
     projects: {
       spendna: { name: 'Spend-na', url: 'https://www.spendna.in/', desc: 'Personal finance tracker — your money, your device. Offline-first, no accounts.', icon: 'assets/icons/spendna-icon.png', repo: 'sandeephakki/spend-na' },
       studin:  { name: 'Student Insight', url: 'https://studin.in/', desc: 'Privacy-first, in-browser student analytics for schools.', icon: 'assets/icons/studin-icon.png', repo: 'sandeephakki/student-insight' }

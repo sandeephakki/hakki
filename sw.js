@@ -2,10 +2,10 @@
 // for the Blogger feed script (blog.js appends it directly, not via SW,
 // so nothing to special-case here). Single-page app now — one HTML shell,
 // hash routing handles the rest. Bump CACHE on every deploy.
-const CACHE = 'hakki-in-v3';
+const CACHE = 'hakki-in-v6';
 const SHELL = [
   './', 'index.html',
-  'css/theme.css', 'js/env-config.js', 'js/app.js', 'js/router.js', 'js/blog.js', 'js/readme.js',
+  'css/theme.css', 'js/env-config.js', 'js/app.js', 'js/router.js', 'js/blog.js', 'js/readme.js', 'js/apps-auto.js', 'js/speaking-auto.js',
   'manifest.json', 'icon-192.png', 'icon-512.png',
   'assets/hakki_bird.svg', 'assets/icons/avatar.jpg',
   'assets/icons/apple-touch-icon.png', 'assets/icons/favicon-16.png',

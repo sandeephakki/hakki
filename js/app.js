@@ -30,6 +30,14 @@
 
     // active nav link is now handled by router.js (hash-based screens)
 
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.querySelector('nav.links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', function () { navLinks.classList.toggle('open'); });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { navLinks.classList.remove('open'); });
+      });
+    }
 
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
