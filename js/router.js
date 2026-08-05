@@ -35,6 +35,9 @@
     document.title = TITLES[name] || TITLES.home;
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
 
+    var fab = document.getElementById('storeFab');
+    if (fab) fab.classList.toggle('hide-on-store', name === 'store');
+
     var entry = ROUTER.screens[name];
     if (entry && !entry.inited) {
       entry.inited = true;
