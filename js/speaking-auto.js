@@ -31,17 +31,22 @@
     var cached = readCache();
     if (cached) { onReady(cached); return; }
 
-    var url = 'https://api.github.com/repos/' + GH_USER + '/' + REPO + '/contents/' + FOLDER;
-    fetch(url, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(function (res) { if (!res.ok) throw new Error('gh api error'); return res.json(); })
-      .then(function (items) {
-        var images = items
-          .filter(function (f) { return /\.(jpe?g|png|webp)$/i.test(f.name); })
-          .sort(function (a, b) { return a.name.localeCompare(b.name); })
-          .map(function (f) { return { url: f.download_url, name: f.name }; });
-        writeCache(images);
-        onReady(images);
-      })
-      .catch(function () { onReady(null); }); // null = keep whatever's hard-coded as fallback
+    var branches = ['main', 'master'];
+    function tryBranch(i) {
+      if (i >= branches.length) { onReady(null); return; } // both failed — keep fallback markup
+      var url = 'https://api.github.com/repos/' + GH_USER + '/' + REPO + '/contents/' + FOLDER + '?ref=' + branches[i];
+      fetch(url, { headers: { Accept: 'application/vnd.github+json' } })
+        .then(function (res) { if (!res.ok) throw new Error('gh api error'); return res.json(); })
+        .then(function (items) {
+          var images = items
+            .filter(function (f) { return /\.(jpe?g|png|webp)$/i.test(f.name); })
+            .sort(function (a, b) { return a.name.localeCompare(b.name); })
+            .map(function (f) { return { url: f.download_url, name: f.name }; });
+          writeCache(images);
+          onReady(images);
+        })
+        .catch(function () { tryBranch(i + 1); });
+    }
+    tryBranch(0);
   };
 })();
